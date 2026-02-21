@@ -1,7 +1,7 @@
-package org.example;
+package org.example.model;
 
 public class Student {
-    private String studentID;
+    private int StudentID;
     private String studentName;
     private String program;
 
@@ -9,14 +9,22 @@ public class Student {
     public Student(){
 
     }
-    public Student(String ID, String name, String program){
-        this.studentID = ID;
+
+//    public Student(int StudentID){
+//        this(StudentID, "Unknown");
+//    }
+//
+//    public Student(int StudentID, String studentName){
+//        this(StudentID, studentName, 0);
+
+    public Student(int ID, String name, String program){
+        this.StudentID = ID;
         this.studentName = name;
         this.program = program;
     }
 
-    public String getStudentID(){
-        return studentID;
+    public int getStudentID(){
+        return StudentID;
     }
 
     public String getStudentName(){
@@ -27,13 +35,14 @@ public class Student {
         return program;
     }
 
+
     public void setName(String name){
         this.studentName = name;
     }
 
-    public void setStudentID(String ID){
-        this.studentID = ID;
-    }
+//    public void setStudentID(int ID){
+//        this.StudentID = ID;
+//    }
 
     public void setProgram(String program){
         this.program = program;
