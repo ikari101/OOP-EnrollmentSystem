@@ -7,15 +7,16 @@ public class Student {
 
 
     public Student(){
-
+        this(0);
     }
 
-//    public Student(int StudentID){
-//        this(StudentID, "Unknown");
-//    }
-//
-//    public Student(int StudentID, String studentName){
-//        this(StudentID, studentName, 0);
+    public Student(int StudentID){
+        this(StudentID, "Unknown");
+    }
+
+    public Student(int StudentID, String studentName) {
+        this(StudentID, studentName, "Information Technology");
+    }
 
     public Student(int ID, String name, String program){
         this.StudentID = ID;
@@ -54,18 +55,31 @@ public class Student {
         System.out.println("Student Name: " + getStudentName());
         System.out.println("Program: " + getProgram());
     }
-//    public Person(String name, int age){
-//        this.name = name;
-//        this.age = age;
-//    }
-//
-//    //Getter
-//    public String getName(){
-//        return name;
-//    }
-//
-//    //Setter
-//    public void setName(String name){
-//        this.name = name;
-//    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "StudentID=" + StudentID +
+                ", studentName='" + studentName + '\'' +
+                ", program='" + program + '\'' +
+                '}';
+    }
 }
+/*
+------------------------Notes----------------------------
+   public Person(String name, int age){
+        this.name = name;
+        this.age = age;
+    }
+
+    //Getter
+    public String getName(){
+        return name;
+    }
+
+    //Setter
+    public void setName(String name){
+        this.name = name;
+
+------------------------Notes----------------------------
+ */

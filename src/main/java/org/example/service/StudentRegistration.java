@@ -19,17 +19,24 @@ public class StudentRegistration {
     }
 
     //Update
-    public void updateStudent(Student student){
+    public String updateStudent(Student student){
         for(int i = 0; i < studentList.size(); i++){
             if(studentList.get(i).getStudentID() == (student.getStudentID())){
-                studentList.set(i, student);
-                break;
+                System.out.print("Enter student name: ");
+                String studentName = hh.nextLine();
+
+                System.out.print("Enter program: ");
+                String program = hh.nextLine();
+
+                studentList.set(i, new Student(student. getStudentID(), studentName, program));
+                return "Successfully updated";
             }
         }
+        return "Student not found";
     }
 
     //Remove
-    public String delete (Student student){
+    public String delete(Student student){
         for(int i = 0; i < studentList.size(); i++){
             if(studentList.get(i).getStudentID() == (student.getStudentID())){
                 studentList.remove(i);
