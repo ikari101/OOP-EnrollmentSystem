@@ -5,9 +5,9 @@ public class Course {
     private String courseName;
     private String program;
 
-    public Course(){
-
-    }
+//    public Course(){
+//
+//    }
 
     public Course(String cID, String cName, String program){
         this.courseID = cID;

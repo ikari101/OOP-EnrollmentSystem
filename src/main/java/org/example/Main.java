@@ -2,8 +2,10 @@ package org.example;
 
 import org.example.model.Course;
 import org.example.model.Student;
+import org.example.model.Instructor;
 import org.example.service.StudentRegistration;
 import org.example.service.CourseRegistration;
+import org.example.service.InstructorRegistration;
 import java.util.*;
 
 
@@ -16,16 +18,24 @@ public class Main {
         Scanner hh = new Scanner(System.in);
 
         StudentRegistration studentRegistration = new StudentRegistration();
+        InstructorRegistration instructorRegistration = new InstructorRegistration();
 
         int choice;
         int studID;
+        int instrID;
         String studName = "";
+        String instrName = "";
         String program = "";
+        ArrayList<String> courses = new ArrayList<>();
         do {
             System.out.println("[1] Save Student");
             System.out.println("[2] Display Student");
             System.out.println("[3] Update Student");
             System.out.println("[4] Remove Student");
+            System.out.println("[5] Save Instructor");
+            System.out.println("[6] Display Instructors");
+            System.out.println("[7] Update Instructor");
+            System.out.println("[8] Remove Instructor");
 
             System.out.print("Enter choice: ");
             choice = hh.nextInt();
@@ -61,6 +71,40 @@ public class Main {
                     System.out.print("Enter student ID to be removed: ");
                     studID = hh.nextInt();
                     studentRegistration.delete(new Student(studID));
+                    break;
+
+
+                case 5:
+                    System.out.print("Enter instructor ID: ");
+                    instrID = hh.nextInt();
+
+                    System.out.print("Enter instructor name: ");
+                    instrName = hh.nextLine();
+                    instrName = hh.nextLine();
+
+                    System.out.print("Enter course: ");
+                    String course = hh.nextLine();
+
+                    courses = new ArrayList<>();
+                    courses.add(course);
+
+                    instructorRegistration.addInstructor(new Instructor(instrID, instrName, courses));
+                    break;
+
+                case 6:
+                    instructorRegistration.displayAll();
+                    break;
+
+                case 7:
+                    System.out.print("Enter instructor ID to update: ");
+                    instrID = hh.nextInt();
+                    instructorRegistration.updateInstructor(new Instructor(instrID));
+                    break;
+
+                case 8:
+                    System.out.print("Enter instructor ID to remove: ");
+                    instrID = hh.nextInt();
+                    instructorRegistration.delete(new Instructor(instrID));
                     break;
 
                 default:
@@ -106,4 +150,4 @@ public class Main {
         student2.display();
         System.out.println();
         course.display();
------------------notes------------------------*/
+-------------------------notes------------------------*/

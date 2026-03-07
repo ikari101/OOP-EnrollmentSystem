@@ -21,14 +21,14 @@ public class StudentRegistration {
     //Update
     public String updateStudent(Student student){
         for(int i = 0; i < studentList.size(); i++){
-            if(studentList.get(i).getStudentID() == (student.getStudentID())){
+            if(studentList.get(i).getID() == (student.getID())){
                 System.out.print("Enter student name: ");
                 String studentName = hh.nextLine();
 
                 System.out.print("Enter program: ");
                 String program = hh.nextLine();
 
-                studentList.set(i, new Student(student. getStudentID(), studentName, program));
+                studentList.set(i, new Student(student. getID(), studentName, program));
                 return "Successfully updated";
             }
         }
@@ -38,7 +38,7 @@ public class StudentRegistration {
     //Remove
     public String delete(Student student){
         for(int i = 0; i < studentList.size(); i++){
-            if(studentList.get(i).getStudentID() == (student.getStudentID())){
+            if(studentList.get(i).getID() == (student.getID())){
                 studentList.remove(i);
                 return "Successfully deleted.";
             }
