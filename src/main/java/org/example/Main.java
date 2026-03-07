@@ -42,6 +42,8 @@ public class Main {
             System.out.println("[10] Display Courses");
             System.out.println("[11] Update Course");
             System.out.println("[12] Remove Course");
+            System.out.println("[13] Display All");
+            System.out.println("[0] End");
 
             System.out.print("Enter choice: ");
             choice = hh.nextInt();
@@ -142,6 +144,11 @@ public class Main {
                     courseID = hh.next();
                     courseRegistration.delete(new Course(courseID));
                     break;
+
+                case 13:
+                    studentRegistration.displayAll();
+                    instructorRegistration.displayAll();
+                    courseRegistration.displayAll();
 
                 default:
                     System.out.println("Invalid choice");
