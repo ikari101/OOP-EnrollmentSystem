@@ -5,3 +5,5 @@
 
 **1. Encapsulation**
 ![img_2.png](img_2.png)
+
+**2. Inheritance**

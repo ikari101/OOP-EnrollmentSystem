@@ -19,13 +19,15 @@ public class Main {
 
         StudentRegistration studentRegistration = new StudentRegistration();
         InstructorRegistration instructorRegistration = new InstructorRegistration();
-
+        CourseRegistration courseRegistration = new CourseRegistration();
         int choice;
         int studID;
         int instrID;
         String studName = "";
         String instrName = "";
         String program = "";
+        String courseID = "";
+        String courseName = "";
         ArrayList<String> courses = new ArrayList<>();
         do {
             System.out.println("[1] Save Student");
@@ -36,6 +38,10 @@ public class Main {
             System.out.println("[6] Display Instructors");
             System.out.println("[7] Update Instructor");
             System.out.println("[8] Remove Instructor");
+            System.out.println("[9] Save Course");
+            System.out.println("[10] Display Courses");
+            System.out.println("[11] Update Course");
+            System.out.println("[12] Remove Course");
 
             System.out.print("Enter choice: ");
             choice = hh.nextInt();
@@ -105,6 +111,36 @@ public class Main {
                     System.out.print("Enter instructor ID to remove: ");
                     instrID = hh.nextInt();
                     instructorRegistration.delete(new Instructor(instrID));
+                    break;
+
+                case 9:
+                    System.out.print("Enter course ID: ");
+                    courseID = hh.next();
+
+                    System.out.print("Enter course name: ");
+                    courseName = hh.nextLine();
+                    courseName = hh.nextLine();
+
+                    System.out.print("Enter program: ");
+                    program = hh.nextLine();
+
+                    courseRegistration.addCourse(new Course(courseID, courseName, program));
+                    break;
+
+                case 10:
+                    courseRegistration.displayAll();
+                    break;
+
+                case 11:
+                    System.out.print("Enter course ID to update: ");
+                    courseID = hh.next();
+                    courseRegistration.updateCourse(new Course(courseID));
+                    break;
+
+                case 12:
+                    System.out.print("Enter course ID to remove: ");
+                    courseID = hh.next();
+                    courseRegistration.delete(new Course(courseID));
                     break;
 
                 default:
