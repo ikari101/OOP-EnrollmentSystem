@@ -5,44 +5,26 @@ public class Student extends Person {
 //    private String studentName;
     private String program;
 
+    public Student(){
+        this(0);
+    }
 
-//    public Student(){
-//        this(0);
-//    }
-//
     public Student(int StudentID){
         this(StudentID, "Unknown", "Unknown");
     }
-//
-//    public Student(int StudentID, String studentName) {
-//        this(StudentID, studentName, "Information Technology");
-//    }
+
 
     public Student(int StudentID, String name, String program){
         super(StudentID, name);
         this.program = program;
     }
 
-//    public int getStudentID(){
-//        return StudentID;
-//    }
-//
-//    public String getStudentName(){
-//        return studentName;
-//    }
 
     public String getProgram(){
         return program;
     }
 
 
-//    public void setName(String name){
-//        this.studentName = name;
-//    }
-
-//    public void setStudentID(int ID){
-//        this.StudentID = ID;
-//    }
 
     public void setProgram(String program){
         this.program = program;
@@ -62,6 +44,11 @@ public class Student extends Person {
                 ", studentName='" + getName() + '\'' +
                 ", program='" + program + '\'' +
                 '}';
+    }
+
+    @Override
+    public void mainTask() {
+        System.out.println("I Study");
     }
 }
 /*
@@ -88,4 +75,27 @@ public class Student extends Person {
         this.age = age;
     }
 ------------------------Notes----------------------------
+//    public Student(){
+//        this(0);
+//    }
+//
+//
+//    public Student(int StudentID, String studentName) {
+//        this(StudentID, studentName, "Information Technology");
+//    }
+//    public int getStudentID(){
+//        return StudentID;
+//    }
+//
+//    public String getStudentName(){
+//        return studentName;
+//    }
+//    public void setName(String name){
+//        this.studentName = name;
+//    }
+
+//    public void setStudentID(int ID){
+//        this.StudentID = ID;
+//    }
+
  */

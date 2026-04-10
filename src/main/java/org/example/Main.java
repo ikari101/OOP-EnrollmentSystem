@@ -9,8 +9,6 @@ import org.example.service.InstructorRegistration;
 import java.util.*;
 
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     static String name = "";
     static String program = "";
@@ -20,6 +18,8 @@ public class Main {
         StudentRegistration studentRegistration = new StudentRegistration();
         InstructorRegistration instructorRegistration = new InstructorRegistration();
         CourseRegistration courseRegistration = new CourseRegistration();
+
+
         int choice;
         int studID;
         int instrID;
@@ -156,6 +156,13 @@ public class Main {
             }
         } while (choice!=0);
 
+        Instructor instructor =  new Instructor();
+        System.out.print("Instructor's Main Task: ");
+        instructor.mainTask();
+
+        Student student = new Student();
+        System.out.print("Student's Main Task");
+        student.mainTask();
     }
 }
 
@@ -193,4 +200,4 @@ public class Main {
         student2.display();
         System.out.println();
         course.display();
--------------------------notes------------------------*/
+--------------------~-----notes------------------------*/

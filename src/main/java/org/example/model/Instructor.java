@@ -6,6 +6,10 @@ public class Instructor extends Person {
     private ArrayList<String> courses;
 
     // Constructors
+    public Instructor(){
+        this(0);
+    }
+
     public Instructor(int ID) {
         this(ID, "Unknown", new ArrayList<>());
     }
@@ -51,5 +55,10 @@ public class Instructor extends Person {
                 ", name='" + getName() + '\'' +
                 ", courses=" + courses +
                 '}';
+    }
+
+    @Override
+    public void mainTask() {
+        System.out.println("I Teach");
     }
 }
