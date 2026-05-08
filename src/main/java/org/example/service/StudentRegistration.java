@@ -1,48 +1,61 @@
 package org.example.service;
 
+import org.example.interfaces.IStudentService;
 import org.example.model.Student;
 
-import java.util.*;
+import java.util.ArrayList;
 
-public class StudentRegistration {
+public class StudentRegistration implements IStudentService {
+
     private ArrayList<Student> studentList = new ArrayList<>();
-    Scanner hh = new Scanner(System.in);
 
-    //Create
-    public void addStudent(Student student){
+    @Override
+    public void addStudent(Student student) {
+
+        for(Student s : studentList) {
+            if(s.getID() == student.getID()) {
+                System.out.println("Duplicate student ID.");
+                return;
+            }
+        }
+
         studentList.add(student);
+        System.out.println("Student added successfully.");
     }
 
-    //Read
-    public void displayAll(){
-        System.out.println(studentList);
+    @Override
+    public ArrayList<Student> getAllStudents() {
+        return studentList;
     }
 
-    //Update
-    public String updateStudent(Student student){
-        for(int i = 0; i < studentList.size(); i++){
-            if(studentList.get(i).getID() == (student.getID())){
-                System.out.print("Enter student name: ");
-                String studentName = hh.nextLine();
+    @Override
+    public String updateStudent(int id, String name, String program) {
 
-                System.out.print("Enter program: ");
-                String program = hh.nextLine();
+        for(Student student : studentList) {
 
-                studentList.set(i, new Student(student. getID(), studentName, program));
-                return "Successfully updated";
+            if(student.getID() == id) {
+                student.setName(name);
+                student.setProgram(program);
+
+                return "Student updated successfully.";
             }
         }
-        return "Student not found";
+
+        return "Student not found.";
     }
 
-    //Remove
-    public String delete(Student student){
-        for(int i = 0; i < studentList.size(); i++){
-            if(studentList.get(i).getID() == (student.getID())){
-                studentList.remove(i);
-                return "Successfully deleted.";
+    @Override
+    public String removeStudent(int id) {
+
+        for(Student student : studentList) {
+
+            if(student.getID() == id) {
+                studentList.remove(student);
+
+                return "Student removed successfully.";
             }
         }
-        return "Error";
+
+        return "Student not found.";
     }
 }

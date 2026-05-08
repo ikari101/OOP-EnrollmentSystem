@@ -1,47 +1,65 @@
 package org.example.service;
 
+import org.example.interfaces.ICourseService;
 import org.example.model.Course;
-import java.util.*;
 
-public class CourseRegistration {
+import java.util.ArrayList;
+
+public class CourseRegistration implements ICourseService {
+
     private ArrayList<Course> courseList = new ArrayList<>();
-    Scanner hh = new Scanner(System.in);
 
-    //Create
-    public void addCourse(Course course){
+    @Override
+    public void addCourse(Course course) {
+
+        for(Course c : courseList) {
+
+            if(c.getCourseID().equals(course.getCourseID())) {
+                System.out.println("Duplicate course ID.");
+                return;
+            }
+        }
+
         courseList.add(course);
+
+        System.out.println("Course added successfully.");
     }
 
-    //Read
-    public void displayAll(){
-        System.out.println(courseList);
+    @Override
+    public ArrayList<Course> getAllCourses() {
+        return courseList;
     }
 
-    //Update
-    public String updateCourse(Course course){
-        for(int i = 0; i < courseList.size(); i++){
-            if(courseList.get(i).getCourseID().equals(course.getCourseID())){
-                System.out.print("Enter course name: ");
-                String courseName = hh.nextLine();
+    @Override
+    public String updateCourse(String courseID, String courseName, String program) {
 
-                System.out.print("Enter program: ");
-                String program = hh.nextLine();
+        for(Course course : courseList) {
 
-                courseList.set(i, new Course(course.getCourseID(), courseName, program));
-                return "Successfully updated";
+            if(course.getCourseID().equals(courseID)) {
+
+                course.setCourseName(courseName);
+                course.setProgram(program);
+
+                return "Course updated successfully.";
             }
         }
-        return "Course not found";
+
+        return "Course not found.";
     }
 
-    //Remove
-    public String delete(Course course){
-        for(int i = 0; i < courseList.size(); i++){
-            if(courseList.get(i).getCourseID().equals(course.getCourseID())){
-                courseList.remove(i);
-                return "Successfully deleted.";
+    @Override
+    public String removeCourse(String courseID) {
+
+        for(Course course : courseList) {
+
+            if(course.getCourseID().equals(courseID)) {
+
+                courseList.remove(course);
+
+                return "Course removed successfully.";
             }
         }
-        return "Error";
+
+        return "Course not found.";
     }
 }

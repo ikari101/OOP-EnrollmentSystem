@@ -1,50 +1,85 @@
 package org.example.service;
 
+import org.example.interfaces.IInstructorService;
 import org.example.model.Instructor;
 
-import java.util.*;
+import java.util.ArrayList;
 
-public class InstructorRegistration {
+public class InstructorRegistration implements IInstructorService {
+
     private ArrayList<Instructor> instructorList = new ArrayList<>();
-    Scanner hh = new Scanner(System.in);
 
-    //Create
-    public void addInstructor(Instructor instructor){
+    @Override
+    public void addInstructor(Instructor instructor) {
+
+        for(Instructor i : instructorList) {
+
+            if(i.getID() == instructor.getID()) {
+                System.out.println("Duplicate instructor ID.");
+                return;
+            }
+        }
+
         instructorList.add(instructor);
+
+        System.out.println("Instructor added successfully.");
     }
 
-    //Read
-    public void displayAll(){
-        System.out.println(instructorList);
+    @Override
+    public ArrayList<Instructor> getAllInstructors() {
+        return instructorList;
     }
 
-    //Update
-    public String updateInstructor(Instructor instructor){
-        for(int i = 0; i < instructorList.size(); i++){
-            if(instructorList.get(i).getID() == (instructor.getID())){
-                System.out.print("Enter instructor name: ");
-                String instructorName = hh.nextLine();
+    @Override
+    public String updateInstructor(int id, String name, ArrayList<String> courses) {
 
-                System.out.print("Enter course: ");
-                String course = hh.nextLine();
+        for(Instructor instructor : instructorList) {
 
-                ArrayList<String> courses = new ArrayList<>();
-                courses.add(course);
-                instructorList.set(i, new Instructor(instructor.getID(), instructorName, courses));
-                return "Successfully updated";
+            if(instructor.getID() == id) {
+
+                instructor.setName(name);
+                instructor.setCourses(courses);
+
+                return "Instructor updated successfully.";
             }
         }
-        return "Instructor not found";
+
+        return "Instructor not found.";
     }
 
-    //Remove
-    public String delete(Instructor instructor){
-        for(int i = 0; i < instructorList.size(); i++){
-            if(instructorList.get(i).getID() == (instructor.getID())){
-                instructorList.remove(i);
-                return "Successfully deleted.";
+    @Override
+    public String removeInstructor(int id) {
+
+        for(Instructor instructor : instructorList) {
+
+            if(instructor.getID() == id) {
+
+                instructorList.remove(instructor);
+
+                return "Instructor removed successfully.";
             }
         }
-        return "Error";
+
+        return "Instructor not found.";
+    }
+
+    @Override
+    public String getInstructorDetails(int id) {
+
+        for(Instructor instructor : instructorList) {
+
+            if(instructor.getID() == id) {
+
+                return instructor.toString();
+            }
+        }
+
+        return "Instructor not found.";
+    }
+
+    @Override
+    public void assignInstructorToSection(int instructorID, String sectionName) {
+
+        System.out.println("Instructor assigned to section: " + sectionName);
     }
 }
