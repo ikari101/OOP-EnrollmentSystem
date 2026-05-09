@@ -1,168 +1,257 @@
 package org.example;
 
+import org.example.interfaces.ICourseService;
+import org.example.interfaces.IInstructorService;
+import org.example.interfaces.IStudentService;
+
 import org.example.model.Course;
-import org.example.model.Student;
 import org.example.model.Instructor;
-import org.example.service.StudentRegistration;
+import org.example.model.Student;
+
 import org.example.service.CourseRegistration;
 import org.example.service.InstructorRegistration;
-import java.util.*;
+import org.example.service.StudentRegistration;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
-    static String name = "";
-    static String program = "";
-    public static void main() {
+
+    public static void main(String[] args) {
+
         Scanner hh = new Scanner(System.in);
 
-        StudentRegistration studentRegistration = new StudentRegistration();
-        InstructorRegistration instructorRegistration = new InstructorRegistration();
-        CourseRegistration courseRegistration = new CourseRegistration();
-
+        IStudentService studentRegistration = new StudentRegistration();
+        IInstructorService instructorRegistration = new InstructorRegistration();
+        ICourseService courseRegistration = new CourseRegistration();
 
         int choice;
-        int studID;
-        int instrID;
-        String studName = "";
-        String instrName = "";
-        String program = "";
-        String courseID = "";
-        String courseName = "";
-        ArrayList<String> courses = new ArrayList<>();
+
         do {
-            System.out.println("[1] Save Student");
-            System.out.println("[2] Display Student");
+
+            System.out.println("\n===== ENROLLMENT SYSTEM =====");
+            System.out.println("[1] Add Student");
+            System.out.println("[2] Display Students");
             System.out.println("[3] Update Student");
             System.out.println("[4] Remove Student");
-            System.out.println("[5] Save Instructor");
+
+            System.out.println("[5] Add Instructor");
             System.out.println("[6] Display Instructors");
             System.out.println("[7] Update Instructor");
             System.out.println("[8] Remove Instructor");
-            System.out.println("[9] Save Course");
+
+            System.out.println("[9] Add Course");
             System.out.println("[10] Display Courses");
             System.out.println("[11] Update Course");
             System.out.println("[12] Remove Course");
-            System.out.println("[13] Display All");
-            System.out.println("[0] End");
+
+            System.out.println("[0] Exit");
 
             System.out.print("Enter choice: ");
             choice = hh.nextInt();
-            switch (choice){
+            hh.nextLine();
+
+            switch(choice) {
+
                 case 1:
-                //Create
-                    System.out.print("Enter student ID: ");
-                    studID = hh.nextInt();
 
-                    System.out.print("Enter student name: ");
-                    studName = hh.nextLine();
-                    studName = hh.nextLine();
+                    System.out.print("Enter Student ID: ");
+                    int studID = hh.nextInt();
+                    hh.nextLine();
 
-                    System.out.print("Enter program: ");
-                    program = hh.nextLine();
-                    studentRegistration.addStudent(new Student(studID, studName, program));
+                    System.out.print("Enter Student Name: ");
+                    String studName = hh.nextLine();
+
+                    System.out.print("Enter Program: ");
+                    String program = hh.nextLine();
+
+                    studentRegistration.addStudent(
+                            new Student(studID, studName, program)
+                    );
+
                     break;
 
                 case 2:
-                //Read
-                    studentRegistration.displayAll();
+
+                    for(Student student : studentRegistration.getAllStudents()) {
+
+                        System.out.println(student);
+                    }
+
                     break;
 
                 case 3:
-                //Update
-                    System.out.print("Enter student ID to be updated: ");
-                    studID = hh.nextInt();
-                    studentRegistration.updateStudent(new Student(studID));
+
+                    System.out.print("Enter Student ID to Update: ");
+                    int updateStudID = hh.nextInt();
+                    hh.nextLine();
+
+                    System.out.print("Enter New Student Name: ");
+                    String newStudName = hh.nextLine();
+
+                    System.out.print("Enter New Program: ");
+                    String newProgram = hh.nextLine();
+
+                    System.out.println(
+                            studentRegistration.updateStudent(
+                                    updateStudID,
+                                    newStudName,
+                                    newProgram
+                            )
+                    );
+
                     break;
 
                 case 4:
-                //Delete
-                    System.out.print("Enter student ID to be removed: ");
-                    studID = hh.nextInt();
-                    studentRegistration.delete(new Student(studID));
+
+                    System.out.print("Enter Student ID to Remove: ");
+                    int removeStudID = hh.nextInt();
+                    hh.nextLine();
+
+                    System.out.println(
+                            studentRegistration.removeStudent(removeStudID)
+                    );
+
                     break;
 
-
                 case 5:
-                    System.out.print("Enter instructor ID: ");
-                    instrID = hh.nextInt();
 
-                    System.out.print("Enter instructor name: ");
-                    instrName = hh.nextLine();
-                    instrName = hh.nextLine();
+                    System.out.print("Enter Instructor ID: ");
+                    int instrID = hh.nextInt();
+                    hh.nextLine();
 
-                    System.out.print("Enter course: ");
+                    System.out.print("Enter Instructor Name: ");
+                    String instrName = hh.nextLine();
+
+                    System.out.print("Enter Course: ");
                     String course = hh.nextLine();
 
-                    courses = new ArrayList<>();
+                    ArrayList<String> courses = new ArrayList<>();
                     courses.add(course);
 
-                    instructorRegistration.addInstructor(new Instructor(instrID, instrName, courses));
+                    instructorRegistration.addInstructor(
+                            new Instructor(instrID, instrName, courses)
+                    );
+
                     break;
 
                 case 6:
-                    instructorRegistration.displayAll();
+
+                    for(Instructor instructor : instructorRegistration.getAllInstructors()) {
+
+                        System.out.println(instructor);
+                    }
+
                     break;
 
                 case 7:
-                    System.out.print("Enter instructor ID to update: ");
-                    instrID = hh.nextInt();
-                    instructorRegistration.updateInstructor(new Instructor(instrID));
+
+                    System.out.print("Enter Instructor ID to Update: ");
+                    int updateInstrID = hh.nextInt();
+                    hh.nextLine();
+
+                    System.out.print("Enter New Instructor Name: ");
+                    String newInstrName = hh.nextLine();
+
+                    System.out.print("Enter New Course: ");
+                    String newCourse = hh.nextLine();
+
+                    ArrayList<String> updatedCourses = new ArrayList<>();
+                    updatedCourses.add(newCourse);
+
+                    System.out.println(
+                            instructorRegistration.updateInstructor(
+                                    updateInstrID,
+                                    newInstrName,
+                                    updatedCourses
+                            )
+                    );
+
                     break;
 
                 case 8:
-                    System.out.print("Enter instructor ID to remove: ");
-                    instrID = hh.nextInt();
-                    instructorRegistration.delete(new Instructor(instrID));
+
+                    System.out.print("Enter Instructor ID to Remove: ");
+                    int removeInstrID = hh.nextInt();
+                    hh.nextLine();
+
+                    System.out.println(
+                            instructorRegistration.removeInstructor(removeInstrID)
+                    );
+
                     break;
 
                 case 9:
-                    System.out.print("Enter course ID: ");
-                    courseID = hh.next();
 
-                    System.out.print("Enter course name: ");
-                    courseName = hh.nextLine();
-                    courseName = hh.nextLine();
+                    System.out.print("Enter Course ID: ");
+                    String courseID = hh.nextLine();
 
-                    System.out.print("Enter program: ");
-                    program = hh.nextLine();
+                    System.out.print("Enter Course Name: ");
+                    String courseName = hh.nextLine();
 
-                    courseRegistration.addCourse(new Course(courseID, courseName, program));
+                    System.out.print("Enter Program: ");
+                    String courseProgram = hh.nextLine();
+
+                    courseRegistration.addCourse(
+                            new Course(courseID, courseName, courseProgram)
+                    );
+
                     break;
 
                 case 10:
-                    courseRegistration.displayAll();
+
+                    for(Course courseObj : courseRegistration.getAllCourses()) {
+
+                        System.out.println(courseObj);
+                    }
+
                     break;
 
                 case 11:
-                    System.out.print("Enter course ID to update: ");
-                    courseID = hh.next();
-                    courseRegistration.updateCourse(new Course(courseID));
+
+                    System.out.print("Enter Course ID to Update: ");
+                    String updateCourseID = hh.nextLine();
+
+                    System.out.print("Enter New Course Name: ");
+                    String updateCourseName = hh.nextLine();
+
+                    System.out.print("Enter New Program: ");
+                    String updateProgram = hh.nextLine();
+
+                    System.out.println(
+                            courseRegistration.updateCourse(
+                                    updateCourseID,
+                                    updateCourseName,
+                                    updateProgram
+                            )
+                    );
+
                     break;
 
                 case 12:
-                    System.out.print("Enter course ID to remove: ");
-                    courseID = hh.next();
-                    courseRegistration.delete(new Course(courseID));
+
+                    System.out.print("Enter Course ID to Remove: ");
+                    String removeCourseID = hh.nextLine();
+
+                    System.out.println(
+                            courseRegistration.removeCourse(removeCourseID)
+                    );
+
                     break;
 
-                case 13:
-                    studentRegistration.displayAll();
-                    instructorRegistration.displayAll();
-                    courseRegistration.displayAll();
+                case 0:
+
+                    System.out.println("System Closed.");
+                    break;
 
                 default:
-                    System.out.println("Invalid choice");
-                    break;
+
+                    System.out.println("Invalid Choice.");
             }
-        } while (choice!=0);
 
-        Instructor instructor =  new Instructor();
-        System.out.print("Instructor's Main Task: ");
-        instructor.mainTask();
+        } while(choice != 0);
 
-        Student student = new Student();
-        System.out.print("Student's Main Task");
-        student.mainTask();
+        hh.close();
     }
 }
 
