@@ -5,8 +5,8 @@ public class Course {
     private String courseName;
     private String program;
 
-    public Course(){
-
+    public Course(String courseID) {
+        this(courseID, "Unknown", "Unknown");
     }
 
     public Course(String cID, String cName, String program){
@@ -23,7 +23,7 @@ public class Course {
         return courseName;
     }
 
-    public String program(){
+    public String getProgram(){
         return program;
     }
 
@@ -42,6 +42,15 @@ public class Course {
     public void display() {
         System.out.println("Course ID: " + getCourseID());
         System.out.println("Course Name: " + getCourseName());
-        System.out.println("Program: " + program());
+        System.out.println("Program: " + getProgram());
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseID='" + courseID + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", program='" + program + '\'' +
+                '}';
     }
 }
