@@ -78,7 +78,7 @@ public class Main {
 
             } catch(InputMismatchException e) {
 
-                System.out.println("Invalid input.");
+                System.out.println("Invalid menu input.");
                 hh.nextLine();
                 choice = -1;
             }
@@ -93,6 +93,12 @@ public class Main {
                         int studID = hh.nextInt();
                         hh.nextLine();
 
+                        if(studID < 0) {
+
+                            System.out.println("Student ID cannot be negative.");
+                            break;
+                        }
+
                         System.out.print("Enter Student Name: ");
                         String studName = hh.nextLine();
 
@@ -105,13 +111,19 @@ public class Main {
 
                     } catch(InputMismatchException e) {
 
-                        System.out.println("Invalid input.");
+                        System.out.println("Invalid student input.");
                         hh.nextLine();
                     }
 
                     break;
 
                 case 2:
+
+                    if(studentRegistration.getAllStudents().isEmpty()) {
+
+                        System.out.println("No students available.");
+                        break;
+                    }
 
                     for(Student student : studentRegistration.getAllStudents()) {
 
@@ -127,6 +139,12 @@ public class Main {
                         System.out.print("Enter Student ID to Update: ");
                         int updateStudID = hh.nextInt();
                         hh.nextLine();
+
+                        if(updateStudID < 0) {
+
+                            System.out.println("Invalid student ID.");
+                            break;
+                        }
 
                         System.out.print("Enter New Student Name: ");
                         String newStudName = hh.nextLine();
@@ -144,7 +162,7 @@ public class Main {
 
                     } catch(InputMismatchException e) {
 
-                        System.out.println("Invalid input.");
+                        System.out.println("Invalid student update input.");
                         hh.nextLine();
                     }
 
@@ -158,13 +176,19 @@ public class Main {
                         int removeStudID = hh.nextInt();
                         hh.nextLine();
 
+                        if(removeStudID < 0) {
+
+                            System.out.println("Invalid student ID.");
+                            break;
+                        }
+
                         System.out.println(
                                 studentRegistration.removeStudent(removeStudID)
                         );
 
                     } catch(InputMismatchException e) {
 
-                        System.out.println("Invalid input.");
+                        System.out.println("Invalid student removal input.");
                         hh.nextLine();
                     }
 
@@ -177,6 +201,12 @@ public class Main {
                         System.out.print("Enter Instructor ID: ");
                         int instrID = hh.nextInt();
                         hh.nextLine();
+
+                        if(instrID < 0) {
+
+                            System.out.println("Instructor ID cannot be negative.");
+                            break;
+                        }
 
                         System.out.print("Enter Instructor Name: ");
                         String instrName = hh.nextLine();
@@ -193,13 +223,19 @@ public class Main {
 
                     } catch(InputMismatchException e) {
 
-                        System.out.println("Invalid input.");
+                        System.out.println("Invalid instructor input.");
                         hh.nextLine();
                     }
 
                     break;
 
                 case 6:
+
+                    if(instructorRegistration.getAllInstructors().isEmpty()) {
+
+                        System.out.println("No instructors available.");
+                        break;
+                    }
 
                     for(Instructor instructor : instructorRegistration.getAllInstructors()) {
 
@@ -215,6 +251,12 @@ public class Main {
                         System.out.print("Enter Instructor ID to Update: ");
                         int updateInstrID = hh.nextInt();
                         hh.nextLine();
+
+                        if(updateInstrID < 0) {
+
+                            System.out.println("Invalid instructor ID.");
+                            break;
+                        }
 
                         System.out.print("Enter New Instructor Name: ");
                         String newInstrName = hh.nextLine();
@@ -235,7 +277,7 @@ public class Main {
 
                     } catch(InputMismatchException e) {
 
-                        System.out.println("Invalid input.");
+                        System.out.println("Invalid instructor update input.");
                         hh.nextLine();
                     }
 
@@ -249,13 +291,19 @@ public class Main {
                         int removeInstrID = hh.nextInt();
                         hh.nextLine();
 
+                        if(removeInstrID < 0) {
+
+                            System.out.println("Invalid instructor ID.");
+                            break;
+                        }
+
                         System.out.println(
                                 instructorRegistration.removeInstructor(removeInstrID)
                         );
 
                     } catch(InputMismatchException e) {
 
-                        System.out.println("Invalid input.");
+                        System.out.println("Invalid instructor removal input.");
                         hh.nextLine();
                     }
 
@@ -279,6 +327,12 @@ public class Main {
                     break;
 
                 case 10:
+
+                    if(courseRegistration.getAllCourses().isEmpty()) {
+
+                        System.out.println("No courses available.");
+                        break;
+                    }
 
                     for(Course courseObj : courseRegistration.getAllCourses()) {
 
@@ -324,6 +378,12 @@ public class Main {
                     System.out.print("Enter Department Name: ");
                     String departmentName = hh.nextLine();
 
+                    if(departmentName.isBlank()) {
+
+                        System.out.println("Department name cannot be empty.");
+                        break;
+                    }
+
                     departments.add(
                             new Department(departmentName)
                     );
@@ -334,126 +394,181 @@ public class Main {
 
                 case 14:
 
-                    if(departments.isEmpty()) {
+                    try {
 
-                        System.out.println("Create a department first.");
-                        break;
+                        if(departments.isEmpty()) {
+
+                            System.out.println("Create a department first.");
+                            break;
+                        }
+
+                        System.out.print("Enter Section Name: ");
+                        String sectionName = hh.nextLine();
+
+                        System.out.print("Enter Max Capacity: ");
+                        int capacity = hh.nextInt();
+                        hh.nextLine();
+
+                        if(capacity <= 0) {
+
+                            System.out.println("Capacity must be greater than 0.");
+                            break;
+                        }
+
+                        Section section = new Section(sectionName, capacity);
+
+                        sections.add(section);
+
+                        System.out.println("\nDepartments:");
+
+                        for(int i = 0; i < departments.size(); i++) {
+
+                            System.out.println("[" + i + "] "
+                                    + departments.get(i).getDepartmentName());
+                        }
+
+                        System.out.print("Select Department Index: ");
+                        int depIndex = hh.nextInt();
+                        hh.nextLine();
+
+                        if(depIndex < 0 || depIndex >= departments.size()) {
+
+                            System.out.println("Invalid department index.");
+                            break;
+                        }
+
+                        departments.get(depIndex).getSections().add(section);
+
+                        System.out.println("Section created.");
+
+                    } catch(InputMismatchException e) {
+
+                        System.out.println("Invalid section input.");
+                        hh.nextLine();
                     }
-
-                    System.out.print("Enter Section Name: ");
-                    String sectionName = hh.nextLine();
-
-                    System.out.print("Enter Max Capacity: ");
-                    int capacity = hh.nextInt();
-                    hh.nextLine();
-
-                    Section section = new Section(sectionName, capacity);
-
-                    sections.add(section);
-
-                    System.out.println("\nDepartments:");
-
-                    for(int i = 0; i < departments.size(); i++) {
-
-                        System.out.println("[" + i + "] "
-                                + departments.get(i).getDepartmentName());
-                    }
-
-                    System.out.print("Select Department Index: ");
-                    int depIndex = hh.nextInt();
-                    hh.nextLine();
-
-                    departments.get(depIndex).getSections().add(section);
-
-                    System.out.println("Section created.");
 
                     break;
 
                 case 15:
 
-                    if(sections.isEmpty()) {
+                    try {
 
-                        System.out.println("No sections available.");
-                        break;
+                        if(sections.isEmpty()) {
+
+                            System.out.println("No sections available.");
+                            break;
+                        }
+
+                        if(instructorRegistration.getAllInstructors().isEmpty()) {
+
+                            System.out.println("No instructors available.");
+                            break;
+                        }
+
+                        System.out.println("\nSections:");
+
+                        for(int i = 0; i < sections.size(); i++) {
+
+                            System.out.println("[" + i + "] "
+                                    + sections.get(i).getSectionName());
+                        }
+
+                        System.out.print("Select Section Index: ");
+                        int sectionIndex = hh.nextInt();
+                        hh.nextLine();
+
+                        if(sectionIndex < 0 || sectionIndex >= sections.size()) {
+
+                            System.out.println("Invalid section index.");
+                            break;
+                        }
+
+                        System.out.println("\nInstructors:");
+
+                        for(int i = 0; i < instructorRegistration.getAllInstructors().size(); i++) {
+
+                            System.out.println("[" + i + "] "
+                                    + instructorRegistration.getAllInstructors().get(i).getName());
+                        }
+
+                        System.out.print("Select Instructor Index: ");
+                        int instructorIndex = hh.nextInt();
+                        hh.nextLine();
+
+                        if(instructorIndex < 0 ||
+                                instructorIndex >= instructorRegistration.getAllInstructors().size()) {
+
+                            System.out.println("Invalid instructor index.");
+                            break;
+                        }
+
+                        sections.get(sectionIndex).setInstructor(
+                                instructorRegistration.getAllInstructors().get(instructorIndex)
+                        );
+
+                        System.out.println("Instructor assigned.");
+
+                    } catch(InputMismatchException e) {
+
+                        System.out.println("Invalid instructor assignment input.");
+                        hh.nextLine();
                     }
-
-                    if(instructorRegistration.getAllInstructors().isEmpty()) {
-
-                        System.out.println("No instructors available.");
-                        break;
-                    }
-
-                    System.out.println("\nSections:");
-
-                    for(int i = 0; i < sections.size(); i++) {
-
-                        System.out.println("[" + i + "] "
-                                + sections.get(i).getSectionName());
-                    }
-
-                    System.out.print("Select Section Index: ");
-                    int sectionIndex = hh.nextInt();
-                    hh.nextLine();
-
-                    System.out.println("\nInstructors:");
-
-                    for(int i = 0; i < instructorRegistration.getAllInstructors().size(); i++) {
-
-                        System.out.println("[" + i + "] "
-                                + instructorRegistration.getAllInstructors().get(i).getName());
-                    }
-
-                    System.out.print("Select Instructor Index: ");
-                    int instructorIndex = hh.nextInt();
-                    hh.nextLine();
-
-                    sections.get(sectionIndex).setInstructor(
-                            instructorRegistration.getAllInstructors().get(instructorIndex)
-                    );
-
-                    System.out.println("Instructor assigned.");
 
                     break;
 
                 case 16:
 
-                    if(sections.isEmpty()) {
-
-                        System.out.println("No sections available.");
-                        break;
-                    }
-
-                    if(studentRegistration.getAllStudents().isEmpty()) {
-
-                        System.out.println("No students available.");
-                        break;
-                    }
-
-                    System.out.println("\nStudents:");
-
-                    for(int i = 0; i < studentRegistration.getAllStudents().size(); i++) {
-
-                        System.out.println("[" + i + "] "
-                                + studentRegistration.getAllStudents().get(i).getName());
-                    }
-
-                    System.out.print("Select Student Index: ");
-                    int studentIndex = hh.nextInt();
-                    hh.nextLine();
-
-                    System.out.println("\nSections:");
-
-                    for(int i = 0; i < sections.size(); i++) {
-
-                        System.out.println("[" + i + "] "
-                                + sections.get(i).getSectionName());
-                    }
-
-                    System.out.print("Select Section Index: ");
-                    int selectedSectionIndex = hh.nextInt();
-                    hh.nextLine();
-
                     try {
+
+                        if(sections.isEmpty()) {
+
+                            System.out.println("No sections available.");
+                            break;
+                        }
+
+                        if(studentRegistration.getAllStudents().isEmpty()) {
+
+                            System.out.println("No students available.");
+                            break;
+                        }
+
+                        System.out.println("\nStudents:");
+
+                        for(int i = 0; i < studentRegistration.getAllStudents().size(); i++) {
+
+                            System.out.println("[" + i + "] "
+                                    + studentRegistration.getAllStudents().get(i).getName());
+                        }
+
+                        System.out.print("Select Student Index: ");
+                        int studentIndex = hh.nextInt();
+                        hh.nextLine();
+
+                        if(studentIndex < 0 ||
+                                studentIndex >= studentRegistration.getAllStudents().size()) {
+
+                            System.out.println("Invalid student index.");
+                            break;
+                        }
+
+                        System.out.println("\nSections:");
+
+                        for(int i = 0; i < sections.size(); i++) {
+
+                            System.out.println("[" + i + "] "
+                                    + sections.get(i).getSectionName());
+                        }
+
+                        System.out.print("Select Section Index: ");
+                        int selectedSectionIndex = hh.nextInt();
+                        hh.nextLine();
+
+                        if(selectedSectionIndex < 0 ||
+                                selectedSectionIndex >= sections.size()) {
+
+                            System.out.println("Invalid section index.");
+                            break;
+                        }
 
                         enrollmentRegistration.enrollStudentInSection(
                                 studentRegistration.getAllStudents().get(studentIndex),
@@ -461,6 +576,11 @@ public class Main {
                         );
 
                         System.out.println("Student enrolled successfully.");
+
+                    } catch(InputMismatchException e) {
+
+                        System.out.println("Invalid enrollment input.");
+                        hh.nextLine();
 
                     } catch (SectionFullException e) {
 
@@ -471,27 +591,41 @@ public class Main {
 
                 case 17:
 
-                    if(departments.isEmpty()) {
+                    try {
 
-                        System.out.println("No departments available.");
-                        break;
+                        if(departments.isEmpty()) {
+
+                            System.out.println("No departments available.");
+                            break;
+                        }
+
+                        System.out.println("\nDepartments:");
+
+                        for(int i = 0; i < departments.size(); i++) {
+
+                            System.out.println("[" + i + "] "
+                                    + departments.get(i).getDepartmentName());
+                        }
+
+                        System.out.print("Select Department Index: ");
+                        int viewDepIndex = hh.nextInt();
+                        hh.nextLine();
+
+                        if(viewDepIndex < 0 || viewDepIndex >= departments.size()) {
+
+                            System.out.println("Invalid department index.");
+                            break;
+                        }
+
+                        enrollmentRegistration.viewDepartmentHierarchy(
+                                departments.get(viewDepIndex)
+                        );
+
+                    } catch(InputMismatchException e) {
+
+                        System.out.println("Invalid hierarchy input.");
+                        hh.nextLine();
                     }
-
-                    System.out.println("\nDepartments:");
-
-                    for(int i = 0; i < departments.size(); i++) {
-
-                        System.out.println("[" + i + "] "
-                                + departments.get(i).getDepartmentName());
-                    }
-
-                    System.out.print("Select Department Index: ");
-                    int viewDepIndex = hh.nextInt();
-                    hh.nextLine();
-
-                    enrollmentRegistration.viewDepartmentHierarchy(
-                            departments.get(viewDepIndex)
-                    );
 
                     break;
 
@@ -505,13 +639,27 @@ public class Main {
                         System.out.print("Enter Rate Per Unit: ");
                         double rate = hh.nextDouble();
 
-                        double totalFee = tuitionRegistration.calculateFee(units, rate);
+                        if(units <= 0 || rate <= 0) {
+
+                            System.out.println("Invalid tuition values.");
+                            hh.nextLine();
+                            break;
+                        }
+
+                        double totalFee =
+                                tuitionRegistration.calculateFee(units, rate);
 
                         System.out.println("Total Fee: " + totalFee);
 
                         System.out.print("Enter Payment: ");
                         double payment = hh.nextDouble();
                         hh.nextLine();
+
+                        if(payment < 0) {
+
+                            System.out.println("Payment cannot be negative.");
+                            break;
+                        }
 
                         double remaining =
                                 tuitionRegistration.getRemainingBalance(
@@ -523,7 +671,7 @@ public class Main {
 
                     } catch(InputMismatchException e) {
 
-                        System.out.println("Invalid input.");
+                        System.out.println("Invalid tuition input.");
                         hh.nextLine();
                     }
 
@@ -544,7 +692,6 @@ public class Main {
         hh.close();
     }
 }
-
 /*------------------------notes---------------------------
         student.setStudentID("000123");
         student.setName("John Doe");
