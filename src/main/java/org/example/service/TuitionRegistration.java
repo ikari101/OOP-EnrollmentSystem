@@ -29,4 +29,12 @@ public class TuitionRegistration implements ITuitionService {
 
         return totalFee - payment;
     }
+
+    public double applyScholarshipDiscount(
+            double totalFee,
+            double discountPercent
+    ) {
+
+        return totalFee - (totalFee * (discountPercent / 100));
+    }
 }

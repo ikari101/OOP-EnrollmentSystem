@@ -378,7 +378,7 @@ public class Main {
                     System.out.print("Enter Department Name: ");
                     String departmentName = hh.nextLine();
 
-                    if(departmentName.isBlank()) {
+                    if(departmentName.trim().isEmpty()) {
 
                         System.out.println("Department name cannot be empty.");
                         break;
@@ -672,6 +672,56 @@ public class Main {
                     } catch(InputMismatchException e) {
 
                         System.out.println("Invalid tuition input.");
+                        hh.nextLine();
+                    }
+
+                    break;
+
+                case 19:
+
+                    try {
+
+                        System.out.print("Enter Units: ");
+                        int scholarshipUnits = hh.nextInt();
+
+                        System.out.print("Enter Rate Per Unit: ");
+                        double scholarshipRate = hh.nextDouble();
+
+                        if(scholarshipUnits <= 0 || scholarshipRate <= 0) {
+
+                            System.out.println("Invalid tuition values.");
+                            hh.nextLine();
+                            break;
+                        }
+
+                        double originalFee =
+                                tuitionRegistration.calculateFee(
+                                        scholarshipUnits,
+                                        scholarshipRate
+                                );
+
+                        System.out.print("Enter Scholarship Discount Percentage: ");
+                        double discount = hh.nextDouble();
+                        hh.nextLine();
+
+                        if(discount < 0 || discount > 100) {
+
+                            System.out.println("Invalid discount percentage.");
+                            break;
+                        }
+
+                        double discountedFee =
+                                tuitionRegistration.applyScholarshipDiscount(
+                                        originalFee,
+                                        discount
+                                );
+
+                        System.out.println("Original Fee: " + originalFee);
+                        System.out.println("Discounted Fee: " + discountedFee);
+
+                    } catch(InputMismatchException e) {
+
+                        System.out.println("Invalid scholarship input.");
                         hh.nextLine();
                     }
 
