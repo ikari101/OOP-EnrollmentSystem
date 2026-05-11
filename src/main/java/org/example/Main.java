@@ -48,25 +48,21 @@ public class Main {
             System.out.println("[2] Display Students");
             System.out.println("[3] Update Student");
             System.out.println("[4] Remove Student");
-
             System.out.println("[5] Add Instructor");
             System.out.println("[6] Display Instructors");
             System.out.println("[7] Update Instructor");
             System.out.println("[8] Remove Instructor");
-
             System.out.println("[9] Add Course");
             System.out.println("[10] Display Courses");
             System.out.println("[11] Update Course");
             System.out.println("[12] Remove Course");
-
             System.out.println("[13] Create Department");
             System.out.println("[14] Create Section");
             System.out.println("[15] Assign Instructor To Section");
             System.out.println("[16] Enroll Student In Section");
             System.out.println("[17] View Department Hierarchy");
-
             System.out.println("[18] Calculate Tuition");
-
+            System.out.println("[19] Calculate Scholarship Tuition");
             System.out.println("[0] Exit");
 
             System.out.print("Enter choice: ");
@@ -739,41 +735,5 @@ public class Main {
 
         } while(choice != 0);
 
-        hh.close();
     }
 }
-/*------------------------notes---------------------------
-        student.setStudentID("000123");
-        student.setName("John Doe");
-        student.setProgram("Information Technology");
-
-        System.out.println("Student ID: " + student.getStudentID());
-        System.out.println("Student Name: " + student.getStudentName());
-        System.out.println("Program: " + student.getProgram());
-        System.out.println();
-        Student student2 = new Student();
-        student2.setStudentID("000124");
-        student2.setName("Jane Doe");
-        student2.setProgram("Information Technology");
-
-        System.out.println("Student ID: " + student2.getStudentID());
-        System.out.println("Student Name: " + student2.getStudentName());
-        System.out.println("Program: " + student2.getProgram());
-        System.out.println();
-        Course course = new Course();
-        course.setCourseID("00001");
-        course.setCourseName("Integrative Programming");
-        course.setProgram("Information Technology");
-        System.out.println();
-        System.out.println("Course ID: " + course.getCourseID());
-        System.out.println("Course Name: " + course.getCourseName());
-        System.out.println("Program: " + course.program());
-        System.out.println();
-
-        System.out.println("Display");
-        student.display();
-        System.out.println();
-        student2.display();
-        System.out.println();
-        course.display();
---------------------~-----notes------------------------*/
